@@ -1,5 +1,7 @@
 import {createStore, combineReducers} from  'redux';
 
-export default createStore(combineReducers({
+import counterReducer from "./reducers/counterReducer";
 
+export default createStore(combineReducers({
+    counterReducer: counterReducer
 }))
