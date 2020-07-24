@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+
+import {increment, decrement} from '../store/actions/counterActions'
 
 const AboutScreenUseRedux = props => {
-    const [counter, setCounter] = useState(0);
-    const decrement = () => {
-        setCounter(prevState => prevState - 1);
+    const dispatch = useDispatch();
+    const counter = useSelector(state => state.counterReducer.counter);
+    const valueToIncrement = useSelector(state => state.counterReducer.valueToIncrement);
+    const decrementFunction = () => {
+        dispatch(decrement());
     }
     return (
         <View>
@@ -12,19 +17,21 @@ const AboutScreenUseRedux = props => {
 
             <View style={styles.containerButton}>
                 <TouchableOpacity
-                    onPress={() => setCounter(prevState => prevState + 1)}
+                    onPress={() => dispatch(increment())}
                     style={[styles.button, styles.buttonIncrement]}
                 >
                     <Text style={{color: 'white'}}>Increment</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={decrement}
+                    onPress={decrementFunction}
                     style={[styles.button, styles.buttonDecrement]}
                 >
                     <Text style={{color: 'white'}}>Decrement</Text>
                 </TouchableOpacity>
             </View>
+
+            <Text>{valueToIncrement}</Text>
         </View>
     );
 }

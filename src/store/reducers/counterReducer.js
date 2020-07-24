@@ -14,7 +14,8 @@ export default function (state = initialState, action) {
         case INCREMENT_COUNTER:
             return {
                 ...state,
-                counter: state.counter + 1
+                counter: state.counter + 1,
+                valueToIncrement:  state.valueToIncrement + 10
             };
         case DECREMENT_COUNTER:
             return {
